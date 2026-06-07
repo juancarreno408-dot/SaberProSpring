@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear [[${rol}]]</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <div class="app">
+        <div th:replace="~{fragments/layout :: sidebar}"></div>
+        <main class="content">
+            <div th:replace="~{fragments/layout :: topbar('Crear ' + ${rol})}"></div>
+            <section class="panel">
+                <form th:action="@{/admin/save-usuario}" th:object="${usuario}" method="post">
+                    <input type="hidden" name="rolSeleccionado" th:value="${rol}">
+                    
+                    <div class="field">
+                        <label>Nombre Completo</label>
+                        <input type="text" th:field="*{nombre}" required>
+                    </div>
+                    <div class="field">
+                        <label>Usuario</label>
+                        <input type="text" th:field="*{username}" required>
+                    </div>
+                    <div class="field">
+                        <label>Contraseña</label>
+                        <input type="password" th:field="*{password}" required>
+                    </div>
+                    <button type="submit">Guardar Registro</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

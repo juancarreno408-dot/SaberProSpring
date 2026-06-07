@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <div class="app">
+        <div th:replace="~{fragments/layout :: sidebar}"></div>
+
+        <main class="content">
+            <div th:replace="~{fragments/layout :: topbar('Dashboard Administrador')}"></div>
+
+            <section class="metrics">
+                <article><span>Estudiantes</span><strong th:text="${totalEstudiantes}">0</strong></article>
+                <article><span>Promedio global</span><strong th:text="${#numbers.formatDecimal(promedioGlobal,1,1)}">0</strong></article>
+                <article><span>Aprobados</span><strong th:text="${aprobados}">0</strong></article>
+                <article><span>Docentes</span><strong th:text="${docentes}">0</strong></article>
+            </section>
+
+            <section class="split">
+                <div class="panel">
+                    <h2>Gestión de Usuarios</h2>
+                    <div class="action-grid">
+						<a th:href="@{/admin/create-DOCENTE}">Crear Docente</a>
+						<a th:href="@{/admin/create-ESTUDIANTE}">Crear Estudiante</a>
+						<a th:href="@{/admin/create-COORDINADOR}">Crear Coordinador</a>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Mejores resultados</h2>
+                    <div th:each="r : ${topResultados}" class="rank">
+                        <b th:text="${r.estudiante.primerApellido}">Apellido</b>
+                        <span th:text="${r.puntaje}">0</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
